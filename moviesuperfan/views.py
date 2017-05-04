@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import authenticate, get_user_model, login, logout
 from .forms import UserRegistrationForm, UserProfileForm, LoginInForm
 from django.core.mail import send_mail
@@ -17,6 +17,13 @@ import os
 
 def index(request):
     return render(request, 'moviesuperfan/index.html')
+
+
+def movie_detail_view(request, pk):
+
+    movie = get_object_or_404(NowPlayingMovie, pk=pk)
+    print(movie)
+    return render(request, 'moviesuperfan/detail.html', { 'movie' : movie })
 
 
 

@@ -32,8 +32,26 @@ def load_now_playing_movies():
             movie_overview = data_receive['results'][i]['overview']
             movie_title = data_receive['results'][i]['title']
             movie_release_date = data_receive['results'][i]['release_date']
+            movie_db_id = data_receive['results'][i]['id']
 
-            moving_playing = NowPlayingMovie.objects.get_or_create(movie_title=movie_title, movie_overview=movie_overview, movie_poster_url=movie_poster_url,movie_release_date=movie_release_date )
+            # Get YouTube key to generate YouTube URLs.
+
+            youtube = get_youtube_url(movie_db_id)
+
+            moving_playing = NowPlayingMovie.objects.get_or_create(movie_title=movie_title, youtube_trailer_key=youtube, movie_db_id = movie_db_id, movie_overview=movie_overview, movie_poster_url=movie_poster_url,movie_release_date=movie_release_date )
+
+
+def get_youtube_url(movie_id):
+
+    url = "https://api.themoviedb.org/3/movie/%s?api_key=%s&language=en-US&page=1&region=US&append_to_response=videos" % (movie_id, PASSWORD)
+    print(url)
+    first_movies_page = requests.get(url)
+    movie_detail_json = first_movies_page.json()
+    print(movie_detail_json)
+    first_video_key = movie_detail_json['videos']['results'][0]['key']   ## TODO check that this is a YouTube key. Error handling in case there are no videos.
+    print(first_video_key)
+    return first_video_key
+
 
 
 if __name__=='__main__':
