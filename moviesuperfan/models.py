@@ -44,9 +44,11 @@ class NowPlayingMovie(models.Model):
     movie_overview = models.CharField(max_length=1000)
     movie_poster_url = models.CharField(max_length=1000)
     movie_release_date = models.DateField()
+    movie_db_id = models.IntegerField()
+    youtube_trailer_key = models.CharField(max_length=100)
 
     def __str__(self):
-        return self.movie_title
+        return str(self.pk) + " " + self.movie_title + " " + self.youtube_trailer_key
 
 class Comments(models.Model):
     movie = models.ForeignKey(NowPlayingMovie, related_name='comments')
