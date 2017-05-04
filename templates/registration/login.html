@@ -1,0 +1,39 @@
+{% extends 'moviesuperfan/base.html' %}
+<!DOCTYPE html>
+{% load crispy_forms_tags %}
+
+    <title>Signin Page</title>
+
+
+
+  {% block content %}
+    <div class="container">
+
+    <div class="row">
+      <div class="col-xs-4 col-xs-offset-4">
+        <form class="form-signin" method="POST">
+          <h2 class="form-signin-heading">Please sign in</h2>
+
+             {% csrf_token %}
+            {{form|crispy}}
+              <input type="checkbox" value="remember-me"> Remember me
+            </label>
+            <button class="btn btn-primary btn-block" id ="signin" type="submit">Sign in</button>
+          </div>
+
+        </form>
+
+      </div>
+    </div>
+
+    </div> <!-- /container -->
+{% endblock %}
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <script type="text/javascript">
+    $('#id_password').attr("placeholder","Password");
+    $('#id_username').attr("placeholder","User name");
+
+    </script>
+</html>

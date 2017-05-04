@@ -1,0 +1,23 @@
+{% extends 'moviesuperfan/base.html' %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+
+
+<div class="container">
+  <div class="row">
+    <div class="col-xs-5 col-xs-offset-4">
+      <h2>Registration Form</h2>
+      {% if registered %}
+      <h1>Thank you for registering. We just sent you an email</h1>
+
+      {% else %}
+      <form  method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{user_form|crispy}}
+        {{profile_form|crispy}}
+        <input type="submit" class="btn btn-primary btn-block" name="" value="Register">
+      </form>
+      {% endif %}
+
+{% endblock %}
