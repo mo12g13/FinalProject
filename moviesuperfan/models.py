@@ -31,13 +31,13 @@ class UserProfile(models.Model):
         self.save()
 
 class UserMovie(models.Model):
-    movie_name = models.CharField(max_length=200)
-    movie_preview = models.FileField(blank=True)
-    user_movies = models.ForeignKey('auth.User', blank=False)
+    user = models.ForeignKey('auth.User', blank=False)
+    movie = models.ForeignKey(NowPlayingMovie)
     movie_rating = models.CharField(max_length=200, blank=False)
-    movie_cover_photo = models.ImageField(upload_to='movie_app/media/')
-    movie_watch = models.BooleanField()
+    movie_watch = models.BooleanField()   ## Whether the user has seen this movie or not.
 
+
+# Data about one movie
 
 class NowPlayingMovie(models.Model):
     movie_title = models.CharField(max_length=1000)
@@ -46,6 +46,13 @@ class NowPlayingMovie(models.Model):
     movie_release_date = models.DateField()
     movie_db_id = models.IntegerField()
     youtube_trailer_key = models.CharField(max_length=100)
+
+    # Add these, same for every movie
+
+    # movie_name = models.CharField(max_length=200)
+    # movie_preview = models.FileField(blank=True)
+    # movie_cover_photo = models.ImageField(upload_to='movie_app/media/')
+
 
     def __str__(self):
         return str(self.pk) + " " + self.movie_title + " " + self.youtube_trailer_key
