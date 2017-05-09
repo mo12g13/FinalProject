@@ -5,15 +5,17 @@ from django.contrib.auth.models import User
 from django.forms import ValidationError
 from . models import  UserMovie, UserProfile
 
+# The user registration form for this website
 class UserRegistrationForm(UserCreationForm):
     class Meta:
         model = User
         fields = ('username', 'first_name', 'last_name', 'email', 'password1', 'password2')
 
-
+# Creation of date selector for the user profile form. From stack overflow
 class DateInput(forms.DateInput):
     input_type = 'date'
 
+# The user profile form
 class UserProfileForm(forms.ModelForm):
     class Meta:
         model = UserProfile
@@ -22,15 +24,18 @@ class UserProfileForm(forms.ModelForm):
             'joined_date': DateInput(),
         }
 
-class UserMovie(forms.ModelForm):
+# The user movie form
+class UserMovieForm(forms.ModelForm):
     class Meta:
         model = UserMovie
-        fields = ('movie_name', 'movie_preview', 'user_movies', 'movie_rating', 'movie_cover_photo')
+        fields = ('movie_watch', 'movie_review')
 
+# The user login form
 class LoginInForm(forms.Form):
     username = forms.CharField()
     password = forms.CharField(widget=forms.PasswordInput)
 
+    # A method that authenticate username, password
     def clean(self, *args, **kwargs):
         username = self.cleaned_data.get('username').lower()
         password = self.cleaned_data.get('password')

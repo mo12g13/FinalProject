@@ -6,3 +6,4 @@ db.sqlite3
 __pyc__
 my_env
 static/images
+static/js/scripts.js

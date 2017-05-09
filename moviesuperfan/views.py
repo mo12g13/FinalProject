@@ -1,25 +1,19 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import authenticate, get_user_model, login, logout
-from .forms import UserRegistrationForm, UserProfileForm, LoginInForm
+from django.contrib.auth.models import User
+from .forms import UserRegistrationForm, UserProfileForm, LoginInForm, UserMovieForm
 from django.core.mail import send_mail
-from django.conf import settings
 from django.contrib.auth.decorators import login_required
-from . models import NowPlayingMovie
+from . models import NowPlayingMovie, UserProfile, UserMovie
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
-# Create your views here.
-import requests
 
-import tmdbsimple as tmdb
-
-import os
-
-
+# index Home page of this website
 def index(request):
     return render(request, 'moviesuperfan/index.html')
 
 
-
+# The registration views for user of this website
 def register(request):
     registered = False
     if request.method == "POST":
@@ -71,13 +65,13 @@ def register(request):
      'profile_form': profile_form,
      'user_form': user_form})
 
-
+# The logout view for users of this website
 def logout_view(request):
-    username = request.user.get_username()
+    user_full_name = request.user.get_full_name()
     response = logout(request)
-    return render(request, 'registration/logout.html', {'username':username})
+    return render(request, 'registration/logout.html', {'user_full_name':user_full_name})
 
-# login view of the user
+# login view for users of this website
 def login_view(request):
     form = LoginInForm(request.POST or None)
     if form.is_valid():
@@ -89,8 +83,9 @@ def login_view(request):
         return redirect('index')
     return render(request, 'registration/login.html', {'form':form})
 
-
-def blog_view(request):
+""" blog view  of this site. I am still working on this part of website.
+I going am include comment section so that users can be able start discussion about a particular movie """
+def movie_suggestion_view(request):
     message = "You have be signed before you can view our blog post"
     movies_in_theater = NowPlayingMovie.objects.all().order_by('-movie_release_date')
     # Paginate page with 10 movies at a time
@@ -102,6 +97,50 @@ def blog_view(request):
     except PageNotAnInteger:
         movies = paginator.page(1)
     except:
-        message = "You have be signed before you can view our blog post"
+        message = "You have be signed in before you can view our blog posts"
         movies = paginator.page(paginator.num_pages)
-    return render(request, 'blog/blog.html', {'movies': movies, 'message':message} )
+    return render(request, 'suggestion/movies_suggestion.html', {'movies': movies, 'message':message} )
+
+@login_required
+def user_profile(request, pk):
+    user = get_object_or_404(User, pk=pk)
+    profile = get_object_or_404(UserProfile, pk=user.pk)
+    movies_watch = UserMovie.objects.filter(movie_watch=True)
+    movies_in_theater = NowPlayingMovie.objects.all().order_by('-movie_release_date')
+    # Paginate page with 10 movies at a time
+    paginator = Paginator(movies_in_theater, 10)
+    # Current page of the movie
+    page = request.GET.get('page')
+    try:
+        movies = paginator.page(page)
+    except PageNotAnInteger:
+        movies = paginator.page(1)
+    except:
+        movies = paginator.page(paginator.num_pages)
+
+    return render(request, 'profile/profile.html', {'user':user, 'profile':profile, 'movies': movies, 'movies_watch':movies_watch})
+
+# This view displays detail information regarding a speciific movie a user wants to learn about
+def movie_details_view(request, pk):
+    movie_details = get_object_or_404(NowPlayingMovie, pk=pk)
+    return render(request, 'moviesuperfan/movie_details.html', {'movie_details': movie_details})
+
+# This views allow the user to mark a movie as watch and add a review of the movie
+def add_movie_review(request, pk):
+    user = user = get_object_or_404(User, pk=request.user.pk)
+    movie = get_object_or_404(NowPlayingMovie, pk=pk)
+    movie_form = UserMovieForm(request.POST)
+    if movie_form.is_valid():
+        user_movie = movie_form.save(commit=False)
+        user_movie.user = user
+        user_movie.movie = movie
+        user_movie.save()
+        return redirect('index')
+    else:
+        movie_form = UserMovieForm()
+        return render(request, 'moviesuperfan/movie_review.html', {'movie_form': movie_form})
+
+
+# This view allows a user to edit review of a movie
+# def edit_review_of_movie(request):
+#     movie_review =

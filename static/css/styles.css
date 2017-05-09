@@ -1,11 +1,9 @@
-
-.myCarousel{
-
+#profile{
+  width: 10px;
+  height: 80px;
+  padding-left: 3px;
 }
-iframe{
-  width: "700px";
-  height: "315px";
-}
+
 html, body{
   font-family: 'Lato', sans-serif;
   font-weight: 300;
@@ -110,11 +108,7 @@ hr{
 .sidebar{
   background: #e9e6df;
 }
-font-family: 'Lato', sans-serif;
-font-weight: 300;
-font-size: 16px;
-line-height: 1.7;
-background-color: #eeefe9
+
 
 .form-signin {
 max-width: 330px;
@@ -155,7 +149,4 @@ border-top-right-radius: 0;
 width: 200px;
 height: 30px;
 border-radius: 5px;
-
-
-
 }

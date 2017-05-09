@@ -1,0 +1,32 @@
+{% extends 'moviesuperfan/base.html'%}
+{% load staticfiles %}
+{% block styles %}
+<link href="{% static "css/movie_detail.css" %}" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Abel" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+  <div class="container">
+    <div class="row">
+      <div class="col-xs-5 well" >
+        <div class="intro-block movie_details">
+          <p class="movie_id hidden">{{movie_details.movie_db_id}}</p>
+          <h4>Movie Title: {{movie_details.movie_title}}</h4>
+          <h2>Overview</h2><p>{{movie_details.movie_overview}} </p>
+
+          <p>Movie release date: {{movie_details.movie_release_date}}</p>
+
+          <p id="no_trailer" class="lead"></p>
+        </div>
+      </div>
+      <div class="col-xs-7 well" >
+        <div class="embed-responsive embed-responsive-16by9">
+        <iframe class="embed-responsive-item" id="movie_trailer" frameborder="0" src=""></iframe>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+{% endblock %}

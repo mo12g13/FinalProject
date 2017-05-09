@@ -15,6 +15,7 @@ API_KEY = os.environ['API_KEY']
 
 # Get number of pages of movies that are playing in USA from the themoviedb.org
 def number_of_pages_of_movies_now_playing():
+
     url = "https://api.themoviedb.org/3/movie/now_playing?api_key={}&language=en-US&page=1&region=US".format(API_KEY)
     json_data = requests.get(url).json()
     pages = json_data['total_pages']
@@ -49,8 +50,12 @@ def movies_now_playing_data():
 # the movie id which will return the movie key for youtube if one exist.
 
 def youtube_movie_trailer(movie_id):
-    url = requests.get('http://api.themoviedb.org/3/movie/{}/videos?api_key={}'.format(movie_id, API_KEY))
-    youtube_key = url.json()['results'][0]['key']
+    try:
+        url = requests.get('http://api.themoviedb.org/3/movie/{}/videos?api_key={}'.format(movie_id, API_KEY))
+        youtube_key = url.json()['results'][0]['key']
+    except IndexError:
+        youtube_key = None
+        pass
     return youtube_key
 if __name__=='__main__':
     movies_now_playing_data()
