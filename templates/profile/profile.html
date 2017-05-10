@@ -93,7 +93,7 @@
 </div>
 <div class="col-xs-3">
   <section>
-    <h4 class="tpad">Tags</h4>
+    <h4 class="tpad">Users Movie Summary</h4>
     <div class="list-group tpad">
     <a href="#" class="list-group-item active"><span class="badge"></span>Movies Summary Data</a>
     <a href="#" class="list-group-item"><span class="badge"><strong><b>{{movie_count}}</b></span>Total movies</a>
@@ -106,22 +106,25 @@
 </div>
 <div class="col-xs-3">
   <section>
-    <h4 class="tpad">Tags</h4>
+    <h4 class="tpad">{{user.last_name}}'s Activities</h4>
     <div class="list-group tpad">
-    <a href="#" class="list-group-item active"><span class="badge"></span>{{user.last_name}}'s Movies Activity</a>
-    <a href="#" class="list-group-item"><span class="badge"><strong><b>{{total_user_watch_movie}}</b></span>Total movies Watch</a>
-      <a href="#" class="list-group-item"><span class="badge">3</span>Movie Review</a>
+    <a href="#" class="list-group-item active"><span class="badge"></span>Activities summary</a>
+    <a href="#" class="list-group-item"><span class="badge"><strong><b>{{total_user_watch_movie}}</b></span>Total movies watch</a>
+      <a href="#" class="list-group-item"><span class="badge">{{current_user_reviews}}</span>Written review</a>
         <a href="#" class="list-group-item"><span class="badge">3</span>Shows</a>
     </div>
     <hr>
   </section>
 </div>
 <div class="col-xs-5">
-
+<h2>Top five movies other are watching</h2>
+{{movie.pk}}
+  <ol>
   {% for movie in top_5_movies%}
-  {{movie.movie__movie_title}}<br>
-  {% endfor %}
+    <li><a href="#">{{movie.movie__movie_title}}</li></a>
 
+  {% endfor %}
+  </ol>
 </div>
 </div>
 {% endblock %}

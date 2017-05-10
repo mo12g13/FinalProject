@@ -95,7 +95,7 @@ def user_profile(request, pk):
     profile = get_object_or_404(UserProfile, pk=request.user.pk)
     movies_watch = UserMovie.objects.filter(user=request.user).filter(movie_watch=True)
     movies_in_theater = NowPlayingMovie.objects.all().order_by('-movie_release_date')
-
+    current_user_reviews= aggregate_data.total_user_reviews(request)
     # Paginate page with 5 movies at a time
     paginator = Paginator(movies_in_theater, 5)
     # Current page of the movie
@@ -113,6 +113,7 @@ def user_profile(request, pk):
         'total_user_watch_movie': total_user_watch_movie,
         'total_users_reviews':total_users_reviews,
         'top_5_movies':top_5_movies,
+        'current_user_reviews': current_user_reviews,
     }
 
     return render(request, 'profile/profile.html', context=context)
