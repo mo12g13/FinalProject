@@ -83,7 +83,9 @@ def movie_suggestion_view(request):
 
 @login_required
 def user_profile(request, pk):
+    # Total movies on this movie site
     movie_count = aggregate_data.total_movies_now_playing()
+    # A query that gets the total number of movies that a particular user have watched
     total_user_watch_movie = UserMovie.objects.filter(user=request.user).filter(movie_watch=True).count()
     user = get_object_or_404(User, pk=request.user.pk)
     profile = get_object_or_404(UserProfile, pk=request.user.pk)
