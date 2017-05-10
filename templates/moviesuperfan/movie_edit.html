@@ -1,0 +1,17 @@
+{% extends 'moviesuperfan/base.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+<div class="container" style="padding-top: 50px;">
+  <div class="row">
+    <div class="col-xs-9">
+      <form class="" method="post">
+        {% csrf_token %}
+
+        {{movie_form|crispy}}
+        <input class="btn btn-primary" type="submit" name="" value="Submit">
+      </form>
+
+    </div>
+  </div>
+</div>
+{% endblock %}

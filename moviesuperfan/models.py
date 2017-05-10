@@ -28,8 +28,8 @@ class UserProfile(models.Model):
 
 # This the table for the user movies. It has relationship with the User and Movies Now Playing models
 class UserMovie(models.Model):
-    user = models.ForeignKey('auth.User', blank=False)
-    movie= models.ForeignKey('NowPlayingMovie')
+    user = models.ForeignKey('auth.User', on_delete=models.CASCADE)
+    movie= models.ForeignKey('NowPlayingMovie', on_delete=models.CASCADE)
     movie_watch = models.BooleanField()
     movie_review = models.CharField(max_length=200, blank=False)
 
