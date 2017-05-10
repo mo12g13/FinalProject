@@ -30,7 +30,7 @@ class UserProfile(models.Model):
 class UserMovie(models.Model):
     user = models.ForeignKey('auth.User', on_delete=models.CASCADE)
     movie= models.ForeignKey('NowPlayingMovie', on_delete=models.CASCADE)
-    movie_watch = models.BooleanField()
+    movie_watch = models.BooleanField(default=False)
     movie_review = models.CharField(max_length=200, blank=False)
 
     def __str__(self):

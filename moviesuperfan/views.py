@@ -83,6 +83,10 @@ def movie_suggestion_view(request):
 
 @login_required
 def user_profile(request, pk):
+    # top 5 movies other are watching
+    top_5_movies = aggregate_data.top_5_movies()
+    # Total movies reviews
+    total_users_reviews = aggregate_data.total_user_review()
     # Total movies on this movie site
     movie_count = aggregate_data.total_movies_now_playing()
     # A query that gets the total number of movies that a particular user have watched
@@ -91,6 +95,7 @@ def user_profile(request, pk):
     profile = get_object_or_404(UserProfile, pk=request.user.pk)
     movies_watch = UserMovie.objects.filter(user=request.user).filter(movie_watch=True)
     movies_in_theater = NowPlayingMovie.objects.all().order_by('-movie_release_date')
+
     # Paginate page with 5 movies at a time
     paginator = Paginator(movies_in_theater, 5)
     # Current page of the movie
@@ -102,11 +107,15 @@ def user_profile(request, pk):
     except:
         movies = paginator.page(paginator.num_pages)
 
-    return render(request, 'profile/profile.html', {'user':user,
-    'profile':profile, 'movies': movies,
-     'movies_watch':movies_watch, 'movie_count':movie_count,
-     'total_user_watch_movie': total_user_watch_movie
-     })
+    context= {'user':user,
+        'profile':profile, 'movies': movies,
+        'movies_watch':movies_watch, 'movie_count':movie_count,
+        'total_user_watch_movie': total_user_watch_movie,
+        'total_users_reviews':total_users_reviews,
+        'top_5_movies':top_5_movies,
+    }
+
+    return render(request, 'profile/profile.html', context=context)
 
 
 # This view displays detail information regarding a speciific movie a user wants to learn about
