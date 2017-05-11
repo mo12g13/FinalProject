@@ -6,13 +6,14 @@ This is a basic web movie application that allows users to keep track of movies 
 
 Requirements:
 The following requirements are to be satisfied before you can effectively run this project. The requirements are as follows:
-
+```
 * requests==2.13.0
 * psycopg2-2.7.1
 * Django==1.11
 * django-crispy-forms==1.6.1
 * Pillow==4.1.1
-Installation Instructions
+```
+## Installation Instructions
 type the following command:
 ```
 >>>  pip install Django==1.11
