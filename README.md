@@ -1,5 +1,5 @@
-## Project Documentation Link
-Moviesuperfan’s documentation!
+# Moviesuperfan’s documentation!
+Official documentation url http://moviesuperfan.readthedocs.io/en/latest/
 Introduction
 This is a basic web movie application that allows users to keep track of movies they have watched. This application also provide list of movies that a  user can watch based on movies that are currently playing in theaters around the United States.
 
@@ -19,7 +19,7 @@ type the following command:
 >>>  pip install requests==2.13.0
 >>>  pip install Pillow==4.1.1
 ```
-##How to run this app
+## How to run this app
 You can run this app by following the below instructions: On windows command line, type in the following command. We assume that you have git install on your computer. If you don’t have git install, you need to download git from this url https://git-scm.com/downloads.
 ```
 >>> git clone https://github.com/mo12g13/FinalProject
@@ -33,7 +33,7 @@ able to have access to themoviedb.org
 following script to populate the database with data
 >>> python movie_data.py
 ```
-##Run the program
+## Run the program
 ```
 >>> python manage.py migrate
 >>> python manage.py makemigrations
