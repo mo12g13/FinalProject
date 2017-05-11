@@ -28,12 +28,7 @@ SECRET_KEY = 'fbzj&5q)=iomd)=$$2-qpv#xz5)3sbw^l8_3r=smvbv*jqras$'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
-EMAIL_HOSTS = 'smtp.gmail.com'
-EMAIL_HOST_USER = 'johnsonmomo548@gmail.com'
-EMAIL_HOST_PASSWORD = os.environ['PASSWORD']
-EMAIL_PORT = 587
-EMAIL_USE_TLS = True
+
 # Application definition
 
 INSTALLED_APPS = [
@@ -83,8 +78,13 @@ WSGI_APPLICATION = 'movie_app.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'moviesuperfan',
+        'USER' : 'moviefan',
+
+        'PASSWORD' : os.environ['POSTGRES_MOVIESUPERFAN_USER_PASSWORD'],
+        'HOST' : 'localhost',
+        'PORT' : '',
     }
 }
 
