@@ -8,12 +8,12 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from . import aggregate_data
 
 
-# index Home page of this website
+# The index Home page view of this website
 def index(request):
     return render(request, 'moviesuperfan/index.html')
 
 
-# The registration views for user of this website
+# The registration views for the user of this website
 def register(request):
     registered = False
     if request.method == "POST":
@@ -87,7 +87,7 @@ def user_profile(request, pk):
     top_5_movies = aggregate_data.top_5_movies()
     # Total movies reviews
     total_users_reviews = aggregate_data.total_user_review()
-    # Total movies on this movie site
+    # Total numbers of  movies on this movie site
     movie_count = aggregate_data.total_movies_now_playing()
     # A query that gets the total number of movies that a particular user have watched
     total_user_watch_movie = UserMovie.objects.filter(user=request.user).filter(movie_watch=True).count()
@@ -119,13 +119,13 @@ def user_profile(request, pk):
     return render(request, 'profile/profile.html', context=context)
 
 
-# This view displays detail information regarding a speciific movie a user wants to learn about
+# This view displays detail information regarding a speciific movie a user wants to learn more about
 @login_required
 def movie_details_view(request, pk):
     movie_details = get_object_or_404(NowPlayingMovie, pk=pk)
     return render(request, 'moviesuperfan/movie_details.html', {'movie_details': movie_details})
 
-# This views allow the user to mark a movie as watch and add a review of the movie
+# This views allow the user to mark a movie as watch and add a review of that movie
 @login_required
 def add_movie_review(request, pk):
     user = get_object_or_404(User, pk=request.user.pk)

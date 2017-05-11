@@ -15,7 +15,7 @@ class UserRegistrationForm(UserCreationForm):
 class DateInput(forms.DateInput):
     input_type = 'date'
 
-# The user profile form
+# User profile form
 class UserProfileForm(forms.ModelForm):
     class Meta:
         model = UserProfile
