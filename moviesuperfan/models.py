@@ -20,7 +20,7 @@ from django.utils import timezone
 class UserProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     joined_date = models.DateTimeField(blank=False)
-    user_profile_pic = models.ImageField(upload_to='profile_pic', blank=True)
+    user_profile_pic = models.ImageField(upload_to='profile_pic', blank=False)
     about_user = models.TextField(blank=False)
 
     def __str__(self):

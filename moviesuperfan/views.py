@@ -31,7 +31,7 @@ def register(request):
                 profile.user_profile_pic = request.FILES['user_profile_pic']
             profile.save()
             registered = True
-            return redirect('moviesuperfan:login')
+            return redirect('moviesuperfan:login_view')
 
         else:
             print(user_form.errors, profile_form.errors)
@@ -63,7 +63,7 @@ def login_view(request):
     return render(request, 'registration/login.html', {'form':form})
 
 
-def movie_suggestion_view(request):
+def blog_view(request):
     """ blog view  of this site. I am still working on this part of website.
     I going am include comment section so that users can be able start discussion about a particular movie """
     message = "You have be signed before you can view our blog post"

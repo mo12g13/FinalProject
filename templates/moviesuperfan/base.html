@@ -36,7 +36,7 @@
     <div class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li class="active"><a href="{% url 'index' %}">Home</a></li>
-        <li><a href="{% url 'moviesuperfan:movie_suggestion_view' %}">Movie Suggestions</a></li>
+        <li><a href="{% url 'moviesuperfan:blog_view' %}">Blog</a></li>
         {% if user.is_superuser %}
         <li><a href="{% url 'admin:index' %}">Admin</a></li>
 

@@ -49,3 +49,9 @@ https://moviesuperfans.herokuapp.com
 ![image](https://cloud.githubusercontent.com/assets/17325437/25932569/a46e6e88-35d7-11e7-91d8-2f5dfa3a54ca.png)
 
 ![image](https://cloud.githubusercontent.com/assets/17325437/25932585/c28177d0-35d7-11e7-8c44-2b764605521b.png)
+
+![image](https://cloud.githubusercontent.com/assets/17325437/25946096/415cb5d8-360f-11e7-99e3-c94af2e24720.png)
+
+![image](https://cloud.githubusercontent.com/assets/17325437/25946204/ae1b5238-360f-11e7-9a09-70aff90b334f.png)
+
+[image](https://cloud.githubusercontent.com/assets/17325437/25946204/ae1b5238-360f-11e7-9a09-70aff90b334f.png)
