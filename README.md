@@ -1,5 +1,6 @@
-# Moviesuperfan’s documentation!
+## Moviesuperfan’s documentation!
 Official documentation url http://moviesuperfan.readthedocs.io/en/latest/
+
 Introduction
 This is a basic web movie application that allows users to keep track of movies they have watched. This application also provide list of movies that a  user can watch based on movies that are currently playing in theaters around the United States.
 
