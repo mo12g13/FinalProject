@@ -4,6 +4,8 @@ Official documentation url http://moviesuperfan.readthedocs.io/en/latest/
 Introduction
 This is a basic web movie application design for movie lovers. The application allows users to keep track of movies they have watched as well as provide reviews for those movies. Also, this application provides list of movies that are currently playing in theaters within the United States from which a user can decide what movie to go watch. Furthermore, the application provides real time trailer for movies that currently have trailer out. User can a taste of the movie by watching a trailer of a particular movie.
 
+# Note: This site isn't yet done. Still working on it.
+
 Requirements:
 The following requirements are to be satisfied before you effectively run this project. The requirements are as follows:
 ```
